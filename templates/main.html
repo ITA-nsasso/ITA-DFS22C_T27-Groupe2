@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <head>
   <title>{{ title }}</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style type="text/css">
+  @import url("style.css");
+  </style>
 </head>
 
 <body>
-  <h1>PLANT HELPLINE</h1>
-  <h2>The date and time on the server is: {{ time }}</h2>
-  <h2> {{ text }} </h2>
-  <a href="/auto/water/ON"><button>Turn ON Auto Watering</button></a>
-  <a href="/auto/water/OFF"><button>Turn OFF Auto Watering</button></a>
-  <a href="/sensor"><button>Check Soil Status</button></a> <br>
-  <a href="/water"><button>Water Once</button></a>
-  <a href="/last_watered"><button>Check Time Last Watered</button></a>
-
+	<div class="title">
+<h1>ARROSAGE AUTOMATIQUE DE LA PLANTE</h1>
+	</div>
+<p>&nbsp;</p>
+<h4>La date et heure du serveur est : {{ time }}</h4>
+  <h4> {{ text }} </h4>
+  <p>&nbsp;</p>
+<a href="/auto/water/ON"><button class="mr-2 mt-2 btn btn-success">Ouvrir l'arrosage</button></a>
+  <a href="/auto/water/OFF"><button class="mr-2 mt-2 btn btn-success">Fermer l'arrosage</button></a>
+  <a href="/sensor"><button class="mr-2 mt-2 btn btn-success">Vérifier l'état du sol
+</button></a><br>
+  <a href="/water"><button class="mr-2 mt-2 btn btn-success">Arroser une fois</button></a>
+  <a href="/last_watered"><button class="ml-1 mt-2 btn btn-success">Vérifier l'heure du dernier arrosage</button></a>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script><br><br>
+<img/><img src="images/leon.gif" width="450" height="192" alt=""/>	
 </body>
 </html>

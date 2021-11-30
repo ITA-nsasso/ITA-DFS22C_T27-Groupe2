@@ -6,13 +6,9 @@ import time
 
 init = False
 bus = SMBus(1)
+ads7830_commands = (0x84, 0xc4, 0x94, 0xd4, 0xa4, 0xe4, 0xb4, 0xf4)
 
 GPIO.setmode(GPIO.BOARD) # Broadcom pin-numbering scheme
-
-ads7830_commands = (0x84, 0xc4, 0x94, 0xd4, 0xa4, 0xe4, 0xb4, 0xf4)
-def read_ads7830(input):
-    bus.write_byte(0x4b, ads7830_commands[input])
-    return bus.read_byte(0x4b)
 
 def get_last_watered():
     try:
@@ -20,6 +16,10 @@ def get_last_watered():
         return f.readline()
     except:
         return "NEVER!"
+
+def read_ads7830(input):
+    bus.write_byte(0x4b, ads7830_commands[input])
+    return bus.read_byte(0x4b)
       
 def get_status(input = 0):
     value = read_ads7830(input)
@@ -30,11 +30,6 @@ def get_status(input = 0):
     else:
         print("Mouillé")
         return 1
-
-def init_output(pin):
-    GPIO.setup(pin, GPIO.OUT)
-    GPIO.output(pin, GPIO.LOW)
-    GPIO.output(pin, GPIO.HIGH)
     
 def auto_water(delay = 5, pump_pin = 40, water_sensor_input = 0):
     consecutive_water_count = 0
