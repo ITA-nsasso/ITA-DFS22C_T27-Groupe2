@@ -7,12 +7,13 @@ import os
 
 app = Flask(__name__)
 
-def template(title = "HELLO!", text = ""):
-    now = datetime.datetime.now()
-    timeString = now
+def template(title = "Happy plant :)", text = ""):
+    dateNow = datetime.datetime.now().strftime("%x")
+    timeNow = datetime.datetime.now().strftime("%H:%M")
     templateDate = {
         'title' : title,
-        'time' : timeString,
+        'date' : dateNow,
+        'time' : timeNow,
         'text' : text
         }
     return templateDate
@@ -32,9 +33,9 @@ def action():
     status = water.get_status()
     message = ""
     if (status == 0):
-        message = "Water me please!"
+        message = "J'ai soif :("
     else:
-        message = "I'm a happy plant"
+        message = "J'me sens bien :)"
 
     templateData = template(text = message)
     return render_template('main.html', **templateData)
@@ -42,25 +43,25 @@ def action():
 @app.route("/water")
 def action2():
     water.pump_on()
-    templateData = template(text = "Watered Once")
+    templateData = template(text = "Arrosée")
     return render_template('main.html', **templateData)
 
 @app.route("/auto/water/<toggle>")
 def auto_water(toggle):
     running = False
     if toggle == "ON":
-        templateData = template(text = "Auto Watering On")
+        templateData = template(text = "Arrosage automatique activé")
         for process in psutil.process_iter():
             try:
                 if process.cmdline()[1] == 'auto_water.py':
-                    templateData = template(text = "Already running")
+                    templateData = template(text = "Arrosage déjà activé")
                     running = True
             except:
                 pass
         if not running:
             os.system("python3.9 auto_water.py&")
     else:
-        templateData = template(text = "Auto Watering Off")
+        templateData = template(text = "Arrosage desactivé")
         os.system("pkill -f auto_water.py")
 
     return render_template('main.html', **templateData)
