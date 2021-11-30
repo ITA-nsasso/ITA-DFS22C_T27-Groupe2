@@ -61,7 +61,7 @@ def auto_water(toggle):
             os.system("python3.9 auto_water.py&")
     else:
         templateData = template(text = "Auto Watering Off")
-        os.system("pkill -f water_modif.py")
+        os.system("pkill -f auto_water.py")
 
     return render_template('main.html', **templateData)
 
