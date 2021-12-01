@@ -35,7 +35,7 @@ def auto_water(delay = 5, pump_pin = 40, water_sensor_input = 0):
     try:
         while 1 and consecutive_water_count < 10:
             time.sleep(delay)
-            wet = (get_status(0) > 20)
+            wet = (get_status(water_sensor_input) > 20)
             print(consecutive_water_count)
             if not wet:
                 if consecutive_water_count < 5:
