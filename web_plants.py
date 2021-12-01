@@ -23,6 +23,10 @@ def home():
     
     return render_template('main.html', **templateData)
 
+@app.route("/get_status")
+def dynamicHumid():
+    return (water.get_status)
+
 @app.route("/last_watered")
 def check_last_watered():
     templateData = template(text = water.get_last_watered(), humid = water.get_status())

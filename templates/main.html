@@ -4,10 +4,9 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'styles/style.css')}}">
   <script type="text/javascript" src="{{url_for('static',filename = 'scripts/currentTime.js')}}"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body onload="staus_loop()">
 	<div class="title">
 <h1>ARROSAGE AUTOMATIQUE DE LA PLANTE</h1>
 	</div>
@@ -28,14 +27,13 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script><br><br>
 <image src="{{url_for('static',filename = 'images/leon.gif')}}" >
 <script type="text/javascript">
-while (true){
-  $.ajax({
-    type: "GET",
-    url: "../get_status.py"
-  }).done(function( o ) {
-    document.getElementById("humid").innerHTML = this.responseText;
-  });
-}
+  function status_loop(){
+    setInterval(get_status, 5000)
+  }
+
+  function get_status(){
+    fetch("./get_status").then(function(response){console.log(response)})
+  }
 </script>
 
 </body>
