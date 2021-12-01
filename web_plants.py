@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, jsonify
 import psutil
 import datetime
 import RPi.GPIO as GPIO
@@ -25,7 +25,8 @@ def home():
 
 @app.route("/get_status")
 def dynamicHumid():
-    return (water.get_status)
+    templateData = template(text = "SQDQSDQSD", humid = water.get_status())
+    return jsonify({'humid' : water.get_status()})
 
 @app.route("/last_watered")
 def check_last_watered():
