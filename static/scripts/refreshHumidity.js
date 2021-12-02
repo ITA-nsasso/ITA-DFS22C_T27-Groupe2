@@ -1,5 +1,6 @@
 function get_status(){
-  fetch("./get_status").then(res => res.json()).then(data => console.log(data))
+  humid = document.getElementById("humid");
+  fetch("./get_status").then(res => res.json()).then(data => humid.innerText = (data['humid']) + "%")
 }
 
 function status_loop(){

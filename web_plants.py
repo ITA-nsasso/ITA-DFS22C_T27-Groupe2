@@ -25,7 +25,6 @@ def home():
 
 @app.route("/get_status")
 def dynamicHumid():
-    templateData = template(text = "SQDQSDQSD", humid = water.get_status())
     return jsonify({'humid' : water.get_status()})
 
 @app.route("/last_watered")
