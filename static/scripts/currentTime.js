@@ -1,3 +1,4 @@
+// Script classique pour récupérer et afficher l'heure sur l'interface
 function currentTime() {
   let date = new Date(); 
   let hh = date.getHours();

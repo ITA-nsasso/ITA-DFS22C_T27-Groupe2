@@ -7,6 +7,7 @@ import os
 
 app = Flask(__name__) 
 
+# Données passées depuis le back pour afficher en front
 def template(title = "Happy plant :)", text = "", humid = 0):
     dateNow = datetime.datetime.now().strftime("%d/%m/%Y")
     templateDate = {
@@ -17,21 +18,25 @@ def template(title = "Happy plant :)", text = "", humid = 0):
         }
     return templateDate
 
+# Différentes routes, permettant de lancer les différentes fonctions du programme, avec un retour front assosié pour informer l'utilisateur
 @app.route("/")
 def home():
     templateData = template(humid = water.get_status())
     
     return render_template('main.html', **templateData)
 
+# Route permettant la récupération dynamique du taux d'humidité
 @app.route("/get_status")
 def dynamicHumid():
     return jsonify({'humid' : water.get_status()})
 
+# Route pour avoir la dernière date d'arrosage de la plante
 @app.route("/last_watered")
 def check_last_watered():
     templateData = template(text = water.get_last_watered(), humid = water.get_status())
     return render_template('main.html', **templateData)
 
+# Route pour retourner un petit message selon l'état de la terre
 @app.route("/sensor")
 def action():
     status = water.get_status()
@@ -44,12 +49,14 @@ def action():
     templateData = template(text = message, humid = water.get_status())
     return render_template('main.html', **templateData)
 
+# Route activant la pompe de façon manuel
 @app.route("/water")
 def action2():
     water.pump_on()
     templateData = template(text = "Arrosée", humid = water.get_status())
     return render_template('main.html', **templateData)
 
+# Route pour gérer si l'on dois allumer ou eteindre l'arrosage automatique, selon le paramètre "toggle"
 @app.route("/auto/water/<toggle>")
 def auto_water(toggle):
     running = False
@@ -70,5 +77,6 @@ def auto_water(toggle):
 
     return render_template('main.html', **templateData)
 
+# Permets de lancer le serveur web à l'éxécution de ce fichier
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80, debug=True)
