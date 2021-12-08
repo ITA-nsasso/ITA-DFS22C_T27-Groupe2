@@ -56,4 +56,4 @@ le tableau de valeurs hexadécimales apparaît, le module I2C est activé
 ![Montage électronique](/static/images/montage.jpg "Montage électronique")
 
 ## Video de présentation & démonstration
-Voici le lien vers notre vidéo de présentation et de démonstration de projet : 
+Voici le lien vers notre vidéo de présentation et de démonstration de projet : https://youtu.be/usrXa7U7lEc
