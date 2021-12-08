@@ -1,3 +1,2 @@
-*.txt
-__pycache__
-
+./last_watered.txt
+./__pycache__
