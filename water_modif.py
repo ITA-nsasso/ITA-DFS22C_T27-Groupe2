@@ -7,10 +7,12 @@ import time
 # On définit une adresse de bus sur laquelle nous communiquerons les informations
 bus = SMBus(1)
 
-# On renseigne la liste des adresses hexadécimales pour les différentes entrées de notre puce ADC (Freenove - ADS7830)
-ads7830_commands = (0x84, 0xc4, 0x94, 0xd4, 0xa4, 0xe4, 0xb4, 0xf4)
-# Ici l'adresse héxadécimale de la puce, définit par le constructeur afin de pouvoir communiquer avec le protocol I2C
-ads7830_address = 0x4b
+# Ici l'adresse héxadécimale de la puce, définit par le constructeur afin de pouvoir communiquer via le protocol I2C
+adc_chip_address = 0x4b
+
+# On renseigne la liste des adresses hexadécimales pour les différentes entrées de notre puce ADC (ici, la Freenove ADS7830)
+adc_chip_address_range = (0x84, 0xc4, 0x94, 0xd4, 0xa4, 0xe4, 0xb4, 0xf4)
+
 # Ces deux valeurs sont les valeurs maximum et minimum brutes retournées par le capteur
 maxWhenDry = 220
 maxWhenWet = 100
@@ -28,8 +30,8 @@ def get_last_watered():
 
 # Récupérer la valeur retournée par le capteur d'humidité
 def read_ads7830(input):
-    bus.write_byte(ads7830_address, ads7830_commands[input])
-    return bus.read_byte(ads7830_address)    
+    bus.write_byte(adc_chip_address, adc_chip_address_range[input])
+    return bus.read_byte(adc_chip_address)    
 
 # Retourner, en pourcentage, le taux d'humidité de la terre
 def get_status(input = 0):
