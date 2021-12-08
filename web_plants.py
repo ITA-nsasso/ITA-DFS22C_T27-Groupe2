@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__) 
 
-# Données passées depuis le back pour afficher en front
+# Données passées depuis le back pour être affichées en front
 def template(title = "Happy plant :)", text = "", humid = 0):
     dateNow = datetime.datetime.now().strftime("%d/%m/%Y")
     templateDate = {
@@ -36,7 +36,7 @@ def check_last_watered():
     templateData = template(text = water.get_last_watered(), humid = water.get_status())
     return render_template('main.html', **templateData)
 
-# Route pour retourner un petit message selon l'état de la terre
+# Route pour retourner un message selon l'état de la terre de la plante
 @app.route("/sensor")
 def action():
     status = water.get_status()
@@ -56,7 +56,7 @@ def action2():
     templateData = template(text = "Arrosée", humid = water.get_status())
     return render_template('main.html', **templateData)
 
-# Route pour gérer si l'on dois allumer ou eteindre l'arrosage automatique, selon le paramètre "toggle"
+# Route pour gérer si l'on dois allumer ou eteindre l'arrosage automatique, selon le paramètre "toggle" récupéré dans l'url
 @app.route("/auto/water/<toggle>")
 def auto_water(toggle):
     running = False
@@ -79,4 +79,4 @@ def auto_water(toggle):
 
 # Permets de lancer le serveur web à l'éxécution de ce fichier
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='0.0.0.0', port=80, debug=False)

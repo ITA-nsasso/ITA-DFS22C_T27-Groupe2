@@ -17,7 +17,7 @@ adc_chip_address_range = (0x84, 0xc4, 0x94, 0xd4, 0xa4, 0xe4, 0xb4, 0xf4)
 maxWhenDry = 220
 maxWhenWet = 100
 
-# Mode de lecture des broches par numéro
+# Mode de lecture des broches par leur numéro
 GPIO.setmode(GPIO.BOARD)
 
 # Récupérer la date/horaire du dernier arrosage
@@ -26,9 +26,9 @@ def get_last_watered():
         f = open("last_watered.txt", "r")
         return f.readline()
     except:
-        return "N'as jamais été arrosée"
+        return "N'a jamais été arrosée"
 
-# Récupérer la valeur retournée par le capteur d'humidité
+# Récupérer la valeur retournée par le capteur d'humidité brute
 def read_ads7830(input):
     bus.write_byte(adc_chip_address, adc_chip_address_range[input])
     return bus.read_byte(adc_chip_address)    
@@ -42,7 +42,7 @@ def get_status(input = 0):
 # Fonction d'arrosage automatique
 def auto_water(delay = 3, pump_pin = 40, water_sensor_input = 0):
     consecutive_water_count = 0
-    print("Here we go! Press CTRL+C to exit")
+    print("CTRL + C pour arrêter")
     try:
         while 1 and consecutive_water_count < 10:
             time.sleep(delay)
